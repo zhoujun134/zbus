@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: zbus #???
+  datasource: # ?????
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/zbus?useSSL=false&testOnBorrow=true&testWhileIdle=true&allowPublicKeyRetrieval=true
+  redis: # redis??
+    host: 127.0.0.1
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+
+  cache:
+    redis:
+      time-to-live: 86400s
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  security:
+    user:
+      name: zhoujun
+      password: woshizhoujun456S
+swagger:
+  description: zBus
+
+server:
+  port: 8888
+  servlet:
+    context-path: /zbus
+## 登录用户的 cookie 缓存时间，单位: 分钟
+login:
+  user:
+    cookie:
+      token:
+        cache:
+          time:
+            minutes: 10
