@@ -55,8 +55,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String tokenKey = SystemConstants.REDIS_USER_ID_PREFIX + token;
         if (!redisCache.existKey(tokenKey)) {
             log.warn("JwtAuthenticationTokenFilter######doFilterInternal: 用户未登录！tokenKey={}", tokenKey);
-            Result<Object> result = Result.fail("无效 token，非法请求。");
-            WebUtils.renderString(response, JsonUtil.toJSONString(result));
+            filterChain.doFilter(request, response);
             return;
         }
         String cacheObject = redisCache.getCacheObject(tokenKey);
